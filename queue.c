@@ -6,10 +6,21 @@ typedef struct Queue {
 	int dequeueCount;
 	int enqueueBlockCount;
 	int dequeueBlockCount;
+	
+	int curAmount;
+	int capacity;
+	char** strings;
 }Queue;
 
 Queue *CreateStringQueue(int size) {
+	Queue *Q;
+	Q = (Queue*)malloc(sizeof(Queue));
 
+	Q->strings = (char**)malloc(sizeof(char*) * size);
+	capacity = size;
+	curAmount = 0;
+
+	return Q;
 }
 
 void EnqueueString(Queue *q, char *string) {
