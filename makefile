@@ -11,20 +11,17 @@ WARNING_FLAGS = -Wall -Wextra
 EXE = start
 SCAN_BUILD_DIR = scan-build-out
 
-all: main.o options_processing.o process_list.o stat_file_parser.o
-	$(CC) -o $(EXE) main.o options_processing.o process_list.o stat_file_parser.o
+all: main.o reader.o queue.o 
+	$(CC) -o $(EXE) main.o reader.o queue.o
 
-main.o: main.c options_processing.h process_list.h stat_file_parser.h
+main.o: main.c reader.h queue.h
 	$(CC) $(WARNING_FLAGS) -c main.c
 
-options_procssing.o: options_processing.c options_processing.h
-	$(CC) $(WARNING_FLAGS) -c options_processing.c
+queue.o: reader.c reader.h
+	$(CC) $(WARNING_FLAGS) -c queue.c
 
-process_list.o: process_list.c process_list.h
-	$(CC) $(WARNING_FLAGS) -c process_list.c
-
-stat_file_parser.o: stat_file_parser.c stat_file_parser.h
-	$(CC) $(WARNING_FLAGS) -c stat_file_parser.c
+reader.o: reader.c reader.h
+	$(CC) $(WARNING_FLAGS) -c reader.c
 
 clean:
 	rm -f $(EXE) *.o
