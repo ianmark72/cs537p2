@@ -2,16 +2,18 @@
 #define QUEUE_H
 
 typedef struct Queue {
-        int enqueueCount;
-        int dequeueCount;
-        int enqueueBlockCount;
-        int dequeueBlockCount;
+        //int enqueueCount;
+        //int dequeueCount;
+        //int enqueueBlockCount;
+        //int dequeueBlockCount;
 
-        int front;
-        int back;
-        int curAmount;
-        int capacity;
-        char** strings;
+        //int front;
+        //int back;
+        //int curAmount;
+        //int capacity;
+        //char** strings;
+
+	//sem_t mutex;
 }Queue;
 
 Queue* CreateStringQueue(int size);
