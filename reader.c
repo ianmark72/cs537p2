@@ -1,9 +1,9 @@
-#include <reader.h>
+#include "reader.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 
-int func read() {
+int read() {
 	char* buffer = NULL;
 	buffer = calloc(100, sizeof(char));
 	//replace with BUF_SIZE
