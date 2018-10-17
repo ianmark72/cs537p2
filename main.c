@@ -21,7 +21,7 @@ int main() {
 	Queue* q3 = CreateStringQueue(queueSize);
 
 	QueuePointer* QP1 = CreateStringQueuePointer(q1, q2);
-	QueuePointer* QP2 = CreateStringQueuePointer(q2, q3)
+	QueuePointer* QP2 = CreateStringQueuePointer(q2, q3);
 
 	//Thread one, Reader Method
 	r = pthread_create(&thread1, NULL, read, q1);
@@ -29,7 +29,7 @@ int main() {
 		perror("Error: Thread Creation.");
 		exit(0);
 	}
-	r = pthread_join(&thread1, NULL);
+	r = pthread_join(thread1, NULL);
         if (r != 0) {
                 perror("Error: Thread Join.");
                 exit(0);
@@ -41,7 +41,7 @@ int main() {
                 perror("Error: Thread Creation.");
                 exit(0);
         }
-        r = pthread_join(&thread2, NULL);
+        r = pthread_join(thread2, NULL);
         if (r != 0) {
                 perror("Error: Thread Join.");
                 exit(0);
@@ -53,7 +53,7 @@ int main() {
                 perror("Error: Thread Creation.");
                 exit(0);
         }
-        r = pthread_join(&thread3, NULL);
+        r = pthread_join(thread3, NULL);
         if (r != 0) {
                 perror("Error: Thread Join.");
                 exit(0);
@@ -65,7 +65,7 @@ int main() {
                 perror("Error: Thread Creation.");
                 exit(0);
         }
-        r = pthread_join(&thread4, NULL);
+        r = pthread_join(thread4, NULL);
         if (r != 0) {
                 perror("Error: Thread Join.");
                 exit(0);

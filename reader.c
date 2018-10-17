@@ -5,25 +5,26 @@
 
 void* read(Queue* queue) {
 
-	const int BUF_SIZE;
+	const int BUF_SIZE = 1024;
 	char input = getchar();
-	if ( first != '/0' && first != EOF ) {
+	if ( input != '\0' && input != EOF ) {
 		char* buffer = calloc(BUF_SIZE, sizeof(char));
 		int ctr = 0;
-		while ( c != EOF && c != '/0') {
+		while ( input != EOF && input != '\0') {
 			if ( ctr > BUF_SIZE) { 
 				//send error to std
 			}
-			if ( input != '/n') {
+			if ( input != '\n') {
 			buffer[ctr] = input;
 			input = getchar();
 			ctr++;
 			}
 			else {
-				EnqueueString(buffer, queue);
+				EnqueueString(queue, buffer);
 				buffer = calloc(BUF_SIZE, sizeof(char));
 				ctr = 0;
 			}
 		}
 	}
+	return NULL;
 }
