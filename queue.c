@@ -19,32 +19,32 @@ typedef struct Queue {
 	char** strings;
 }Queue;
 
+Queue *CreateStringQueue(int size) {
+        Queue *Q;
+        Q = (Queue*)malloc(sizeof(Queue));
+
+        Q->strings = malloc(sizeof(char*) * size);
+        Q->capacity = size;
+        Q->front = 0;
+        Q->back = 0;
+        Q->curAmount = 0;
+
+        return Q;
+}
+
 typedef struct QueuePointer {
         Queue* q1;
         Queue* q2;
 }QueuePointer;
 
-QueuePointer *CreateStringQueuePointer(Queue* q1, Queue* q2) {
-	QueuePointer* QP;
-	QP = (QueuePointer*)malloc(sizeof(QueuePointer));
+QueuePointer *CreateStringQueuePointer(Queue* curQ, Queue* nextQ) {
+        QueuePointer* QP;
+        QP = (QueuePointer*)malloc(sizeof(QueuePointer));
 
-	QP->q1 = q1;
-	QP->q2 = q2;
+        QP->q1 = curQ;
+        QP->q2 = nextQ;
 
-	return QP;
-}
-
-Queue *CreateStringQueue(int size) {
-	Queue *Q;
-	Q = (Queue*)malloc(sizeof(Queue));
-
-	Q->strings = malloc(sizeof(char*) * size);
-	Q->capacity = size;
-	Q->front = 0;
-	Q->back = 0;
-	Q->curAmount = 0;
-
-	return Q;
+        return QP;
 }
 
 void EnqueueString(Queue *q, char *string) {

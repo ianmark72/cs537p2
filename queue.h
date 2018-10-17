@@ -5,6 +5,8 @@ typedef struct Queue {
 }Queue;
 
 typedef struct QueuePointer {
+	Queue* q1;
+        Queue* q2;
 }QueuePointer;
 
 QueuePointer *CreateStringQueuePointer(Queue* q1, Queue* q2);
