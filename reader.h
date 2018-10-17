@@ -2,7 +2,7 @@
 #define READER_H
 #include "queue.h"
 
-void* read(Queue* queue);
+void* read(void* q);
 
 #endif /* READER_H */
 

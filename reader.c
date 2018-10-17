@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include "queue.h"
 
-void* read(Queue* queue) {
+void* read(void* q) {
+	Queue* queue = (Queue*) q;
 
 	const int BUF_SIZE = 1024;
 	char input = getchar();

@@ -3,17 +3,20 @@
 #include <string.h>
 #include "queue.h"
 
-void* munch1(QueuePointer* QP) {
+void* munch1(void* qp) {
+	QueuePointer* QP = (QueuePointer*) qp;
+	const int BUF_SIZE = 1024;
 	char space = ' ';
 	char asterisk = '*';
 	char* string;
 	string = DequeueString(QP->q1);
 
-	for(int i = 0; i < strnlen(string); i++) {
+	for(unsigned int i = 0; i < strnlen(string, BUF_SIZE); i++) {
 		if(string[i] == space) {
 			string[i] = asterisk;
 		}
 	}
 
 	EnqueueString(QP->q2, string);
+	return NULL; 
 }

@@ -16,15 +16,15 @@ int main() {
 	pthread_t thread3;
 	pthread_t thread4;
 
-	Queue* q1 = CreateStringQueue(queueSize);
-	Queue* q2 = CreateStringQueue(queueSize);
-	Queue* q3 = CreateStringQueue(queueSize);
+	Queue* queue1 = CreateStringQueue(queueSize);
+	Queue* queue2 = CreateStringQueue(queueSize);
+	Queue* queue3 = CreateStringQueue(queueSize);
 
-	QueuePointer* QP1 = CreateStringQueuePointer(q1, q2);
-	QueuePointer* QP2 = CreateStringQueuePointer(q2, q3);
+	QueuePointer* QP1 = CreateStringQueuePointer(queue1, queue2);
+	QueuePointer* QP2 = CreateStringQueuePointer(queue2, queue3);
 
 	//Thread one, Reader Method
-	r = pthread_create(&thread1, NULL, read, q1);
+	r = pthread_create(&thread1, NULL, read, queue1);
         if (r != 0) {
 		perror("Error: Thread Creation.");
 		exit(0);
@@ -60,7 +60,7 @@ int main() {
         }
 
 	//Thread four, Writer Method
-	r = pthread_create(&thread4, NULL, writer, q3);
+	r = pthread_create(&thread4, NULL, writer, queue3);
         if (r != 0) {
                 perror("Error: Thread Creation.");
                 exit(0);
