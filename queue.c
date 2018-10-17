@@ -6,11 +6,6 @@
 pthread_mutex_t lock;
 pthread_cond_t queueThread;
 
-typedef struct QueuePointer {
-	Queue* q1;
-	Queue* q2;
-}QueuePointer;
-
 typedef struct Queue {
 	int enqueueCount;
 	int dequeueCount;
@@ -23,6 +18,11 @@ typedef struct Queue {
 	int capacity;
 	char** strings;
 }Queue;
+
+typedef struct QueuePointer {
+        Queue* q1;
+        Queue* q2;
+}QueuePointer;
 
 QueuePointer *CreateStringQueuePointer(Queue* q1, Queue* q2) {
 	QueuePointer* QP;
