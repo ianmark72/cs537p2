@@ -1,17 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "queue.h"
 
-void munch2(Queue* curQ, Queue* nextQ) {
+void* munch2(QueuPointer* QP) {
         char* string;
-        string = DequeueString(curQ);
+	int i = 0;
+        string = DequeueString(QP->q1);
 
-        for(int i = 0; i < strnlen(string); i++) {
-                if(string[i] < 123 || string[i] > 96) {
-                        string[i] = string[i] - 32;
-                }
-        }
+        while(string != '\0') {
+		string[i] = toupper(string[i]);
+		i++;
+	}
 
-        EnqueueString(nextQ, string);
+        EnqueueString(QP->q2, string);
 }

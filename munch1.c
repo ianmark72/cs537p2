@@ -3,11 +3,11 @@
 #include <string.h>
 #include "queue.h"
 
-void munch1(Queue* curQ, Queue* nextQ) {
+void* munch1(QueuePointer* QP) {
 	char space = ' ';
 	char asterisk = '*';
 	char* string;
-	string = DequeueString(curQ);
+	string = DequeueString(QP->q1);
 
 	for(int i = 0; i < strnlen(string); i++) {
 		if(string[i] == space) {
@@ -15,5 +15,5 @@ void munch1(Queue* curQ, Queue* nextQ) {
 		}
 	}
 
-	EnqueueString(nextQ, string);
+	EnqueueString(QP->q2, string);
 }

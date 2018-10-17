@@ -3,7 +3,7 @@
 #include <string.h>
 #include "queue.h"
 
-void writer(Queue* q){
+void* writer(Queue* q){
 	char* string;
 	string = DequeueString(q);
 	printf("%s\n", string);

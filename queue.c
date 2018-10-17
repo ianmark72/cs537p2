@@ -6,6 +6,11 @@
 pthread_mutex_t lock;
 pthread_cond_t queueThread;
 
+typedef struct QueuePointer {
+	Queue* q1;
+	Queue* q2;
+}QueuePointer;
+
 typedef struct Queue {
 	int enqueueCount;
 	int dequeueCount;
@@ -18,6 +23,16 @@ typedef struct Queue {
 	int capacity;
 	char** strings;
 }Queue;
+
+QueuePointer *CreateStringQueuePointer(Queue* q1, Queue* q2) {
+	QueuePointer* QP;
+	QP = (QueuePointer*)malloc(sizeof(QueuePointer));
+
+	QP->q1 = q1;
+	QP->q2 = q2;
+
+	return QP;
+}
 
 Queue *CreateStringQueue(int size) {
 	Queue *Q;
