@@ -29,21 +29,11 @@ int main() {
 		perror("Error: Thread Creation.");
 		exit(0);
 	}
-	r = pthread_join(thread1, NULL);
-        if (r != 0) {
-                perror("Error: Thread Join.");
-                exit(0);
-        }
 
 	//Thread two, Munch1 Method
 	r = pthread_create(&thread2, NULL, munch1, QP1);
         if (r != 0) {
                 perror("Error: Thread Creation.");
-                exit(0);
-        }
-        r = pthread_join(thread2, NULL);
-        if (r != 0) {
-                perror("Error: Thread Join.");
                 exit(0);
         }
 
@@ -53,11 +43,6 @@ int main() {
                 perror("Error: Thread Creation.");
                 exit(0);
         }
-        r = pthread_join(thread3, NULL);
-        if (r != 0) {
-                perror("Error: Thread Join.");
-                exit(0);
-        }
 
 	//Thread four, Writer Method
 	r = pthread_create(&thread4, NULL, writer, queue3);
@@ -65,9 +50,26 @@ int main() {
                 perror("Error: Thread Creation.");
                 exit(0);
         }
-        r = pthread_join(thread4, NULL);
+	
+	//Join threads
+	r = pthread_join(thread1, NULL);
         if (r != 0) {
                 perror("Error: Thread Join.");
                 exit(0);
         }
+	r = pthread_join(thread2, NULL);
+        if (r != 0) {
+                perror("Error: Thread Join.");
+                exit(0);
+        }
+	r = pthread_join(thread3, NULL);
+        if (r != 0) {
+                perror("Error: Thread Join.");
+                exit(0);
+        }
+	r = pthread_join(thread4, NULL);
+        if (r != 0) {
+                perror("Error: Thread Join.");
+                exit(0);
+        }	
 }

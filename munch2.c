@@ -10,7 +10,7 @@ void* munch2(void* qp) {
 	int i = 0;
         string = DequeueString(QP->q1);
 
-        while(string != '\0') {
+        while(string[i] != '\0') {
 		string[i] = toupper(string[i]);
 		i++;
 	}

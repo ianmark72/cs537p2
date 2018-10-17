@@ -4,7 +4,7 @@
 #include "queue.h"
 
 void* writer(void* q){
-	Queue Q = (Queue*) q;
+	Queue* Q = (Queue*) q;
 	char* string;
 	string = DequeueString(Q);
 	printf("%s\n", string);
