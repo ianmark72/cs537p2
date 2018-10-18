@@ -1,5 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
+#include <pthread.h>
 
 typedef struct Queue {
 	int enqueueCount;
