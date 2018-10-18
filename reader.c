@@ -23,15 +23,11 @@ void* read(void* q) {
 				ctr++;
 			} else {
 				buffer[ctr] = input;
-				printf("about to calloc string\n");
 				string = (char*)calloc(BUF_SIZE, sizeof(char));
 				if(string == NULL) { fprintf(stderr, "error calloc");}
-				printf("%s", buffer);
 				strncpy(string, buffer, BUF_SIZE);
 				//EnqueueString(queue, string);
-				printf("%s", string);
 				memset(buffer, 0, BUF_SIZE);
-				printf("after memset: %s\n",buffer);
 				ctr = 0;
 				input = getchar();
 			}
