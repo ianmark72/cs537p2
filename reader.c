@@ -16,7 +16,8 @@ void* read(void* q) {
 		int ctr = 0;
 		//reorganize loop condition 
 		while ( input != EOF && input != '\0') {
-			if ( ctr > BUF_SIZE - 1) { 
+			if ( ctr >= BUF_SIZE - 1) {
+				buffer[ctr] = '\0';
 				fprintf(stderr, "exceeded buffer size");
 			}
 			if ( input != '\n' && input != EOF) {
@@ -24,8 +25,7 @@ void* read(void* q) {
 				input = getchar();
 				ctr++;
 			} else {
-				printf("here");
-				buffer[ctr] = input;
+				//buffer[ctr] = input;
 				string = (char*)calloc(BUF_SIZE, sizeof(char));
 				if(string == NULL) { fprintf(stderr, "error calloc");}
 				strncpy(string, buffer, BUF_SIZE);
