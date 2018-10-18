@@ -8,11 +8,11 @@
 #
 CC = gcc
 WARNING_FLAGS = -Wall -Wextra
-EXE = start
+EXE = prodcomm
 SCAN_BUILD_DIR = scan-build-out
 
 all: main.o reader.o queue.o munch1.o munch2.o writer.o 
-	$(CC) -o $(EXE) main.o reader.o queue.o munch1.o munch2.o writer.o
+	$(CC) -o $(EXE) main.o reader.o queue.o munch1.o munch2.o writer.o -lpthread
 
 main.o: main.c reader.h queue.h
 	$(CC) $(WARNING_FLAGS) -c main.c -lpthread
