@@ -30,6 +30,11 @@ Queue *CreateStringQueue(int size) {
         Q->front = 0;
         Q->back = 0;
         Q->curAmount = 0;
+	// 	int enqueueCount;
+	// int dequeueCount;
+	// int enqueueBlockCount;
+	// int dequeueBlockCount;
+	//initialize
 
 	r = pthread_mutex_init(&Q->lock, NULL);
 	if (r != 0) {

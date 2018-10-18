@@ -5,6 +5,7 @@
 #include "queue.h"
 
 void* munch2(void* qp) {
+	//while true, on null exit
 	QueuePointer* QP = (QueuePointer*) qp;
         char* string;
 	int i = 0;

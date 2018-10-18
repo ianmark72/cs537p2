@@ -4,13 +4,14 @@
 #include "queue.h"
 
 void* munch1(void* qp) {
+	// while true on null, exit
 	QueuePointer* QP = (QueuePointer*) qp;
 	const int BUF_SIZE = 1024;
 	char space = ' ';
 	char asterisk = '*';
 	char* string;
 	string = DequeueString(QP->q1);
-
+	while(1) {
 	for(unsigned int i = 0; i < strnlen(string, BUF_SIZE); i++) {
 		if(string[i] == space) {
 			string[i] = asterisk;
@@ -19,4 +20,5 @@ void* munch1(void* qp) {
 
 	EnqueueString(QP->q2, string);
 	return NULL; 
+	}
 }
