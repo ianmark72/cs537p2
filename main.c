@@ -71,5 +71,9 @@ int main() {
         if (r != 0) {
                 perror("Error: Thread Join.");
                 exit(0);
-        }	
+        }
+
+	PrintQueueStats(queue1);
+	PrintQueueStats(queue2);
+	PrintQueueStats(queue3);	
 }
