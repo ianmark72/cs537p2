@@ -3,9 +3,6 @@
 #include <string.h>
 #include <pthread.h>
 
-pthread_mutex_t lock;
-pthread_cond_t queueThread;
-
 typedef struct Queue {
 	int enqueueCount;
 	int dequeueCount;
@@ -17,9 +14,14 @@ typedef struct Queue {
 	int curAmount;
 	int capacity;
 	char** strings;
+
+	pthread_mutex_t lock;
+        pthread_cond_t empty;
+        pthread_cond_t full;
 }Queue;
 
 Queue *CreateStringQueue(int size) {
+	int r;
         Queue *Q;
         Q = (Queue*)malloc(sizeof(Queue));
 
@@ -28,6 +30,24 @@ Queue *CreateStringQueue(int size) {
         Q->front = 0;
         Q->back = 0;
         Q->curAmount = 0;
+
+	r = pthread_mutex_init(&Q->lock, NULL);
+	if (r != 0) {
+                perror("Error: Mutex Initialization.");
+                exit(0);
+        }
+
+	r = pthread_cond_init(&Q->empty, NULL);
+	if (r != 0) {
+                perror("Error: Condition Variable Initialization.");
+                exit(0);
+        }
+
+	r = pthread_cond_init(&Q->full, NULL);
+	if (r != 0) {
+                perror("Error: Condition Variable Initialization.");
+                exit(0);
+        }
 
         return Q;
 }
@@ -48,11 +68,11 @@ QueuePointer *CreateStringQueuePointer(Queue* curQ, Queue* nextQ) {
 }
 
 void EnqueueString(Queue *q, char *string) {
-	pthread_mutex_lock(&lock);
+	pthread_mutex_lock(&q->lock);
 	if(q->capacity == q->curAmount) {
 		printf("Queue is full.");
 		//Block enqueue.
-		pthread_cond_wait(&queueThread, &lock);
+		pthread_cond_wait(&q->full, &q->lock);
 		q->enqueueBlockCount++; 
 	}
 
@@ -63,21 +83,21 @@ void EnqueueString(Queue *q, char *string) {
 		q->back++;
 	}
 	if(q->curAmount == 0) {
-		pthread_cond_signal(&queueThread);
+		pthread_cond_signal(&q->empty);
 	}
 	q->curAmount++;
 	q->enqueueCount++;
 	
-	pthread_mutex_unlock(&lock);
+	pthread_mutex_unlock(&q->lock);
 }
 
 char* DequeueString(Queue *q) {
-	pthread_mutex_lock(&lock);
+	pthread_mutex_lock(&q->lock);
 	char* string;
 	if(q->curAmount == 0) {
 		printf("Nothing to dequeue.");
 		//Block dequeue.
-		pthread_cond_wait(&queueThread, &lock);
+		pthread_cond_wait(&q->empty, &q->lock);
 		q->dequeueBlockCount++;
 	}
 
@@ -89,20 +109,20 @@ char* DequeueString(Queue *q) {
 		q->front++;
 	}
 	if(q->curAmount == q->capacity){
-		pthread_cond_signal(&queueThread);	
+		pthread_cond_signal(&q->full);	
 	}
 	q->curAmount--;
 	q->dequeueCount++;
 
 	return string;
-	pthread_mutex_unlock(&lock);
+	pthread_mutex_unlock(&q->lock);
 }
 
 void PrintQueueStats(Queue *q) {
-	pthread_mutex_lock(&lock);
+	pthread_mutex_lock(&q->lock);
 	printf("Enqueue Count: %d\n", q->enqueueCount);
 	printf("Dequeue Count: %d\n", q->dequeueCount);
 	printf("Enqueue Blocked Count: %d\n", q->enqueueBlockCount);
 	printf("Dequeue Blocked Count: %d\n", q->dequeueBlockCount);
-	pthread_mutex_unlock(&lock);
+	pthread_mutex_unlock(&q->lock);
 }

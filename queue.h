@@ -2,6 +2,20 @@
 #define QUEUE_H
 
 typedef struct Queue {
+	int enqueueCount;
+        int dequeueCount;
+        int enqueueBlockCount;
+        int dequeueBlockCount;
+
+        int front;
+        int back;
+        int curAmount;
+        int capacity;
+        char** strings;
+
+	pthread_mutex_t lock;
+        pthread_cond_t empty;
+        pthread_cond_t full;
 }Queue;
 
 typedef struct QueuePointer {
