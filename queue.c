@@ -167,17 +167,15 @@ void EnqueueString(Queue *q, char *string) {
 		q->back++;
 	}
 	q->curAmount++;
-
+	
 	//If the string is the final null pointer don't count as enqueue.
 	if(string != NULL) {
 		q->enqueueCount++; 
 	}
-
-	//printQueue(q);
 	
 	//Unlock and signal dequeue.
-	pthread_mutex_unlock(&q->lock);
 	pthread_cond_signal(&q->empty);
+	pthread_mutex_unlock(&q->lock);
 }
 
 /**
@@ -215,12 +213,10 @@ char* DequeueString(Queue *q) {
 	if(string != NULL) {
 		q->dequeueCount++;
 	}
-
-	//printQueue(q);
 	
 	//Unlock mutex and signal enqueue.
-	pthread_mutex_unlock(&q->lock);
 	pthread_cond_signal(&q->full);
+	pthread_mutex_unlock(&q->lock);
 	return string;
 }
 
