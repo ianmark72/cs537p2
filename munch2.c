@@ -18,6 +18,14 @@
 #include <pthread.h>
 #include "queue.h"
 
+/**
+ *  This function takes strings from the first queue and then changes all
+ *  the letters to uppercase. It then places the string onto the next queue.
+ *
+ *  Parameters: qp - A pointer to two queues.
+ *
+ *  Return: void* - NULL, nothing of value.
+ */
 void* munch2(void* qp) {
 	//Cast queue pointer from void*.
 	QueuePointer* QP = (QueuePointer*) qp;

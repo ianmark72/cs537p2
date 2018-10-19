@@ -20,6 +20,11 @@
 #include "writer.h"
 #include "queue.h"
 
+/**
+ *  This function creates all of the threads, and calls them on the functions.
+ *  It is also where the queues are created and the threads are joined 
+ *  together.
+ */
 int main() {
 	//Error return.
 	int r;

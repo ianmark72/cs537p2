@@ -17,6 +17,14 @@
 #include <pthread.h>
 #include "queue.h"
 
+/**
+ *  This function takes strings from the first queue and changes the spaces
+ *  to asterisks. The puts the string onto the second queue.
+ *
+ *  Parameters: qp - A pointer to two queues.
+ *
+ *  Return: void* - NULL, nothing of value.
+ */
 void* munch1(void* qp) {
 	//Cast to queue pointer from void*.
 	QueuePointer* QP = (QueuePointer*) qp;
