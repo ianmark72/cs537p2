@@ -73,6 +73,7 @@ QueuePointer *CreateStringQueuePointer(Queue* curQ, Queue* nextQ) {
 
 void EnqueueString(Queue *q, char *string) {
 	pthread_mutex_lock(&q->lock);
+	printQueue( q);
 	if(q->capacity == q->curAmount) {	
 		//Block enqueue.	
 		pthread_cond_wait(&q->full, &q->lock);
@@ -96,6 +97,7 @@ void EnqueueString(Queue *q, char *string) {
 
 char* DequeueString(Queue *q) {
 	pthread_mutex_lock(&q->lock);
+	printQueue( q);
 	char* string;
 	if(q->curAmount == 0) {
 		//Block dequeue.
@@ -125,4 +127,14 @@ void PrintQueueStats(Queue *q) {
 	pthread_mutex_lock(&q->lock);
 	fprintf(stderr, "Queue Stats:\nEnqueue Count: %d\nDequeue Count: %d\nEnqueue Blocked Count: %d\nDequeue Blocked Count: %d\n", q->enqueueCount, q->dequeueCount, q->enqueueBlockCount, q->dequeueBlockCount);
 	pthread_mutex_unlock(&q->lock);
+}
+
+// function to print out a queue
+void printQueue(Queue* q) {
+	for (int i =0; i < 10; i ++) {
+		if(q->strings[i] == NULL) { printf("%i:  No string", i);}
+		else { 
+			printf("%i: %s", i , q->strings[i]);
+		}
+	}
 }
