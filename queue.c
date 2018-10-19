@@ -123,10 +123,6 @@ char* DequeueString(Queue *q) {
 
 void PrintQueueStats(Queue *q) {
 	pthread_mutex_lock(&q->lock);
-	printf("Queue Stats:\n");
-	printf("Enqueue Count: %d\n", q->enqueueCount);
-	printf("Dequeue Count: %d\n", q->dequeueCount);
-	printf("Enqueue Blocked Count: %d\n", q->enqueueBlockCount);
-	printf("Dequeue Blocked Count: %d\n", q->dequeueBlockCount);
+	fprintf(stderr, "Queue Stats:\nEnqueue Count: %d\nDequeue Count: %d\nEnqueue Blocked Count: %d\nDequeue Blocked Count: %d\n", q->enqueueCount, q->dequeueCount, q->enqueueBlockCount, q->dequeueBlockCount);
 	pthread_mutex_unlock(&q->lock);
 }
