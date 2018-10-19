@@ -66,7 +66,9 @@ void* read(void* q) {
 		//Check for newlines or end of file characters.
 		if ( input != '\n' && input != EOF) {
 			//Put the character into the buffer and increment counter.
-			buffer[ctr] = input;
+			if(buffer != NULL) { 
+				buffer[ctr] = input;
+			}
 			ctr++;
 			noNewLine = 1;
 		} else { 
