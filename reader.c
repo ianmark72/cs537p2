@@ -18,6 +18,11 @@ void* read(void* q) {
 		do {
 			if ( ctr >= BUF_SIZE -1 ) {
 				capacity = 1;
+				char c;
+				while( c != '\n'){ c = getchar();}
+				fprintf(stderr, "Line longer than %i\n", BUF_SIZE);
+				memset(buffer, 0, BUF_SIZE);
+				ctr = 0;
 			}
 			input = getchar();
 			if ( input != '\n' && input != EOF && capacity != 1) {
@@ -28,13 +33,15 @@ void* read(void* q) {
 				if(input != EOF) {
 				string = (char*)calloc(BUF_SIZE, sizeof(char));
 				if(string == NULL) { fprintf(stderr, "error calloc");}
+				printf("%s\n", buffer);
 				strncpy(string, buffer, BUF_SIZE);
-				EnqueueString(queue, string);
+				
+			//	EnqueueString(queue, string);
 				memset(buffer, 0, BUF_SIZE);
 				ctr = 0;
 				} else{ 
 					string = NULL;
-					EnqueueString(queue, string);
+				//	EnqueueString(queue, string);
 				}
 			}
 		} while ( input != EOF);
