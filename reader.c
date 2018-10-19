@@ -17,6 +17,14 @@
 #include "queue.h"
 #include <pthread.h>
 
+/**
+ *  This method reads in lines from stdin and parse through them.
+ *  It puts the strings in the queue.
+ *
+ *  Parameters: q - The queue that the strings are being passed to.
+ *
+ *  Return: void* - NULL, nothing of value.
+ */
 void* read(void* q) {
 	//Cast queue from void*.
 	Queue* queue = (Queue*) q;
@@ -26,12 +34,7 @@ void* read(void* q) {
 	char* string;
 	//Next character input from std input.
 	char input;
-<<<<<<< HEAD
-	char* buffer = (char*)calloc(BUF_SIZE, sizeof(char));
-	if(buffer == NULL) { fprintf(stderr, "error with calloc");}
-=======
 	//Counter for the buffer entries.
->>>>>>> 30b6d0788d13ec63027b9c7002301bae41bce656
 	int ctr = 0;
 	//Character to cycle through excess lines that are too long.
         char c;
@@ -40,6 +43,7 @@ void* read(void* q) {
 
 	//Allocate memory for the buffer.
 	char* buffer = (char*)calloc(BUF_SIZE, sizeof(char));
+	if(buffer == NULL) { fprintf(stderr, "error with calloc");}
 	
 	//Loop until the end of the file.
 	do {
@@ -77,12 +81,10 @@ void* read(void* q) {
 				if(string == NULL) { fprintf(stderr, "error strncpy");}
 				EnqueueString(queue, string);
 				memset(buffer, 0, BUF_SIZE);
-<<<<<<< HEAD
+
 				if( buffer == NULL) { fprintf(stderr, "error with memset");}
-=======
 
 				//Reset values.
->>>>>>> 30b6d0788d13ec63027b9c7002301bae41bce656
 				ctr = 0;
 				noNewLine = 0;
 			} else{ 
