@@ -1,3 +1,16 @@
+/***********************************************************************
+* FILENAME: main.c 
+*
+* DESCRIPTION:
+*       This is the main file of the program. It creates all of the
+*       threads, queues, and queuePointers. It also prints the stats
+*       of the queues at the end.
+* 
+* AUTHORS: Matthew Derzay, CS Login: derzay
+*          Ian Mark, CS Login: imark
+*
+***********************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -8,18 +21,23 @@
 #include "queue.h"
 
 int main() {
+	//Error return.
 	int r;
+	//Max capacity of the queue.
 	int queueSize = 10;
 
+	//Threads for each function.
 	pthread_t thread1;
 	pthread_t thread2;
 	pthread_t thread3;
 	pthread_t thread4;
 
+	//Queues to pass strings between the four functions.
 	Queue* queue1 = CreateStringQueue(queueSize);
 	Queue* queue2 = CreateStringQueue(queueSize);
 	Queue* queue3 = CreateStringQueue(queueSize);
 
+	//Queue Pointers to hold two queue to be passed as one argument into pthread_create.
 	QueuePointer* QP1 = CreateStringQueuePointer(queue1, queue2);
 	QueuePointer* QP2 = CreateStringQueuePointer(queue2, queue3);
 
@@ -73,6 +91,7 @@ int main() {
                 exit(0);
         }
 
+	//Print out queue stats.
 	PrintQueueStats(queue1);
 	PrintQueueStats(queue2);
 	PrintQueueStats(queue3);	
