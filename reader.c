@@ -24,14 +24,18 @@ void* read(void* q) {
 				buffer[ctr] = input;
 				ctr++;
 			} else { // change adding EOF to NULL
-				if(input == EOF) { }
-				//buffer[ctr] = input;
+				//buffer[ctr] = input
+				if(input != EOF) {
 				string = (char*)calloc(BUF_SIZE, sizeof(char));
 				if(string == NULL) { fprintf(stderr, "error calloc");}
 				strncpy(string, buffer, BUF_SIZE);
 				EnqueueString(queue, string);
 				memset(buffer, 0, BUF_SIZE);
 				ctr = 0;
+				} else{ 
+					string = NULL;
+					EnqueueString(queue, string);
+				}
 			}
 		} while ( input != EOF);
 
