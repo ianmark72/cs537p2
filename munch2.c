@@ -14,6 +14,7 @@ void* munch2(void* qp) {
 
 	while(1) {
 		string = DequeueString(QP->q1);
+		i = 0;
 
 		if(string == NULL) {
 			terminate = 1;
