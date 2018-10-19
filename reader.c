@@ -11,6 +11,7 @@ void* read(void* q) {
 	char* string;
 	char input;
 	char* buffer = (char*)calloc(BUF_SIZE, sizeof(char));
+	if(buffer == NULL) { fprintf(stderr, "error with calloc");}
 	int ctr = 0;
 	char c;
 	int noNewLine = 1;
@@ -22,6 +23,7 @@ void* read(void* q) {
 			}while( c != '\n');
 			fprintf(stderr, "Line longer than %i\n", BUF_SIZE);
 			memset(buffer, 0, BUF_SIZE);
+			if( buffer == NULL) { fprintf(stderr, "error with memset");}
 			ctr = 0;
 			noNewLine = 1;
 		}
@@ -37,15 +39,18 @@ void* read(void* q) {
 				if(string == NULL) { fprintf(stderr, "error calloc");}
 
 				strncpy(string, buffer, BUF_SIZE);
+				if(string == NULL) { fprintf(stderr, "error strncpy");}
 				EnqueueString(queue, string);
 				memset(buffer, 0, BUF_SIZE);
-
+				if( buffer == NULL) { fprintf(stderr, "error with memset");}
 				ctr = 0;
 				noNewLine = 0;
 			} else{ //EOF
 				if(noNewLine == 1) {
 					string = (char*)calloc(BUF_SIZE, sizeof(char));
+					if(string == NULL) { fprintf(stderr, "error with calloc");}
 					strncpy(string, buffer, BUF_SIZE);
+					if(string == NULL) { fprintf(stderr, "error strncpy");}
 					EnqueueString(queue, string);
 				}
 				string = NULL;
