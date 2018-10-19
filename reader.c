@@ -77,10 +77,15 @@ void* read(void* q) {
 				if(string == NULL) { fprintf(stderr, "error calloc");}
 
 				//Copy string from buffer and enqueue.
-				strncpy(string, buffer, BUF_SIZE);
+				if(buffer != NULL && string != NULL) {
+					strncpy(string, buffer, BUF_SIZE);
+				}
 				if(string == NULL) { fprintf(stderr, "error strncpy");}
 				EnqueueString(queue, string);
-				memset(buffer, 0, BUF_SIZE);
+
+				if(buffer != NULL) {
+					memset(buffer, 0, BUF_SIZE);
+				}
 
 				if( buffer == NULL) { fprintf(stderr, "error with memset");}
 
@@ -93,7 +98,10 @@ void* read(void* q) {
 					//Allocate memory and enqueue.
 					string = (char*)calloc(BUF_SIZE, sizeof(char));
 					if(string == NULL) { fprintf(stderr, "error with calloc");}
-					strncpy(string, buffer, BUF_SIZE);
+
+					if(string != NULL && buffer != NULL) {
+						strncpy(string, buffer, BUF_SIZE);
+					}
 					if(string == NULL) { fprintf(stderr, "error strncpy");}
 					EnqueueString(queue, string);
 				}
